@@ -1,25 +1,47 @@
 import {React, useState} from 'react'
+import './App.css';
+require('purecss')
 
-export default function FlashCard({front, back}) {
+export default function FlashCard({front, back, id, onRemove}) {
     const [cardFront, setCardFront] = useState(true);
-
+    const [selected, setSelected] = useState(false);
     function changeSide(){
         setCardFront(!cardFront);
+        console.log("id: " + id)
     }
 
+    function handleRemove(e){
+        setSelected(true);
+        setTimeout(() => setSelected(false), 200);
+        setTimeout(() => {
+            onRemove(id);
+            e.target.checked = false;
+        }, 400);
+    }
+
+    var card;
     if(cardFront){
-        return (
-            // <div onClick={changeSide} style={{backgroundColor:"#000000", height: '100px', width: "200px", textAlign: 'center', textAlignVertical: "center"}}>
-            <div onClick={changeSide} style={{backgroundColor:"#000000", textAlign:"center", verticalAlign:"center", flex: 1}}>
-                {front}
-            </div>
-            );
+        card = (
+        <div onClick={changeSide} style={{backgroundColor:"#ebe6e6"}}>
+            {front}
+        </div>
+        );
     }
     else {
-        return (
-            <div onClick={changeSide} style={{backgroundColor:"#595656", textAlign:"center", verticalAlign:"center", flex: 1}}>
-                {back}
-            </div>
-            );
-    }   
+        card = (
+        <div onClick={changeSide} style={{backgroundColor:"#c4bebe"}}>
+            {back}
+        </div>    
+        );
+    } 
+
+    return (
+        <>
+            <div className='item-check' onClick={handleRemove} style={{
+                height:"3px", width:"3px", borderRadius:"50%", border:"0.1em dashed red", aspectRatio:"1/1", 
+                background:((!selected && "white") || (selected && "#f06565"))
+            }}></div>
+            {card}
+        </> 
+    );
 }

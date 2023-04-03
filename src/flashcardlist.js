@@ -1,12 +1,15 @@
 import {React} from 'react'
 import FlashCard from './flashcard';
+import './App.css';
 
-export default function FlashCardList({questions}) {
+export default function FlashCardList({questions, onRemove}) {
 
-    return <div style={{display: "grid"}}>
+    return <ul className='card-list'>
         {questions.map(question => (
-            <FlashCard front={question["front"]} back={question["back"]}></FlashCard>
+            <li className='card-li'> 
+                <FlashCard front={question["front"]} back={question["back"]} id={question["id"]} onRemove={onRemove}></FlashCard>
+            </li>
         ))}
-    </div>
+    </ul>
     
 }

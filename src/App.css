@@ -24,8 +24,40 @@
   color: white;
 }
 
+.card-list {
+  width:100%;
+  min-height: 100vh;
+  padding:0px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.card-li {
+  list-style-type: none;
+  width:50%;
+  display: flex;
+}
+
+.card-li *{
+  height:10vh;
+  padding: 0.5em;
+  font-size: calc(9px + 1vmin);
+  margin: 0.5vh;
+}
+
+.card-li div{
+  width: 100%;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.item-check{
+  transition-property: background, width, height;
+  transition-duration: 400ms;
+  transition-timing-function: linear;
 }
 
 @keyframes App-logo-spin {
